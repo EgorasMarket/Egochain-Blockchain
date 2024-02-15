@@ -401,16 +401,10 @@ github.com/creachadair/taskgroup v0.4.2/go.mod h1:qiXUOSrbwAY3u0JPGTzObbE3yf9hcX
 github.com/creack/pty v1.1.7/go.mod h1:lj5s0c3V2DBrqTV7llrYr5NG6My20zk30Fl46Y7DoTY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/creack/pty v1.1.18 h1:n56/Zwd5o6whRC5PMGretI4IdRLlmBXYNjScPaBgsbY=
-github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20231027074119-c05c9c61c90e h1:1+NtTl/lzVNKXZUv41HYQ76gtxojDi6gbQrxM2lgDpo=
-github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20231027074119-c05c9c61c90e/go.mod h1:PMRblIxBPdkHeEw36YxCWLO0DylfmEJYIgmdo6VgwZo=
 github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20240129013154-12efd9b7643f h1:1iOcVkGzlyf69VmH0HRMa6Hx5RQQiV3ojdII6sqmtcc=
 github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20240129013154-12efd9b7643f/go.mod h1:b2P7ilsxOWAhl9augFxBeRVeqecnQtzqfzpqsglj5ik=
-github.com/crypto-org-chain/cronos/store v0.0.5-0.20231027074119-c05c9c61c90e h1:3mq9zn5+49covVejnfwPIIx0i6pzRXxKJzz4PuVVn9g=
-github.com/crypto-org-chain/cronos/store v0.0.5-0.20231027074119-c05c9c61c90e/go.mod h1:N6IfJDLTTo0vxyuY4MSMMX2TOdBd/tozpjnYGJmAfmE=
 github.com/crypto-org-chain/cronos/store v0.0.5-0.20240129013154-12efd9b7643f h1:A9n61ZEpG2HXOMJ0Q8EHGGzEAp9IUA4E9PiydqVeJy0=
 github.com/crypto-org-chain/cronos/store v0.0.5-0.20240129013154-12efd9b7643f/go.mod h1:puaAzL204Ni6axMuMNfZREz9gazZbhAbb4ksRhdLBdI=
-github.com/crypto-org-chain/cronos/versiondb v0.0.0-20231027074119-c05c9c61c90e h1:kN1HNLp2xmy8vIHpGWjsX8dCL6sXID2Tw4qZZk7XYd4=
-github.com/crypto-org-chain/cronos/versiondb v0.0.0-20231027074119-c05c9c61c90e/go.mod h1:8W9LCw+FhR2sFI+nkjSi0ItZ0IeSyUjc6CSvuaYTU2s=
 github.com/crypto-org-chain/cronos/versiondb v0.0.0-20240129013154-12efd9b7643f h1:crbxFPAPS4LaTSimB4JeZF8apfDYy39E2+JFGwFEKFQ=
 github.com/crypto-org-chain/cronos/versiondb v0.0.0-20240129013154-12efd9b7643f/go.mod h1:8L1WprpzpqIz6erpQjd/qOvMNpYDG4qzR5vWgAqv6Jw=
 github.com/cyphar/filepath-securejoin v0.2.3/go.mod h1:aPGpWjXOXUn2NCNjFvBE6aRxGGx79pTxQpKOJNYHHl4=
@@ -1806,8 +1800,8 @@ google.golang.org/grpc v1.48.0/go.mod h1:vN9eftEi1UMyUsIF80+uQXhHjbXYbm0uXoFCACu
 google.golang.org/grpc v1.49.0/go.mod h1:ZgQEeidpAuNRZ8iRrlBKXZQP1ghovWIVhdJRyCDK+GI=
 google.golang.org/grpc v1.50.0/go.mod h1:ZgQEeidpAuNRZ8iRrlBKXZQP1ghovWIVhdJRyCDK+GI=
 google.golang.org/grpc v1.50.1/go.mod h1:ZgQEeidpAuNRZ8iRrlBKXZQP1ghovWIVhdJRyCDK+GI=
-google.golang.org/grpc v1.61.0 h1:TOvOcuXn30kRao+gfcvsebNEa5iZIiLkisYEkf7R7o0=
-google.golang.org/grpc v1.61.0/go.mod h1:VUbo7IFqmF1QtCAstipjG0GIoq49KvMe9+h1jFLBNJs=
+google.golang.org/grpc v1.61.1 h1:kLAiWrZs7YeDM6MumDe7m3y4aM6wacLzM1Y/wiLP9XY=
+google.golang.org/grpc v1.61.1/go.mod h1:VUbo7IFqmF1QtCAstipjG0GIoq49KvMe9+h1jFLBNJs=
 google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0/go.mod h1:6Kw0yEErY5E/yWrBtf03jp27GLLJujG4z/JK95pnjjw=
 google.golang.org/protobuf v0.0.0-20200109180630-ec00e32a8dfd/go.mod h1:DFci5gLYBciE7Vtevhsrf46CRTquxDuWsQurQQe4oz8=
 google.golang.org/protobuf v0.0.0-20200221191635-4d8936d0db64/go.mod h1:kwYJMbMJ01Woi6D6+Kah6886xMZcty6N08ah7+eCXa0=
