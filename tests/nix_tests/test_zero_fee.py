@@ -28,16 +28,16 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["egax", "evmos-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on evmos and
-    evmos built with rocksdb (memIAVL + versionDB)
+    run on egax and
+    egax built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield custom_evmos_rocksdb
     else:
         raise NotImplementedError
@@ -47,7 +47,7 @@ def test_cosmos_tx(evmos_cluster):
     """
     test basic cosmos transaction works with zero fees
     """
-    denom = "aevmos"
+    denom = "egax"
     cli = evmos_cluster.cosmos_cli()
     sender = eth_to_bech32(ADDRS["signer1"])
     receiver = eth_to_bech32(ADDRS["signer2"])

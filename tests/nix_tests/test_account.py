@@ -21,21 +21,21 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-ws", "evmos-rocksdb", "geth"])
+@pytest.fixture(scope="module", params=["egax", "egax-ws", "egax-rocksdb", "geth"])
 def cluster(request, custom_evmos, custom_evmos_rocksdb, geth):
     """
-    run on evmos, evmos websocket,
-    evmos built with rocksdb (memIAVL + versionDB)
+    run on egax, egax websocket,
+    egax built with rocksdb (memIAVL + versionDB)
     and geth
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
-    elif provider == "evmos-ws":
+    elif provider == "egax-ws":
         evmos_ws = custom_evmos.copy()
         evmos_ws.use_websocket()
         yield evmos_ws
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield custom_evmos_rocksdb
     elif provider == "geth":
         yield geth
@@ -61,7 +61,8 @@ def test_get_transaction_count(cluster):
     )
     receipt = w3.eth.wait_for_transaction_receipt(txhash)
     assert receipt.status == 1
-    [n1, n2] = [w3.eth.get_transaction_count(receiver, b) for b in [blk, "latest"]]
+    [n1, n2] = [w3.eth.get_transaction_count(
+        receiver, b) for b in [blk, "latest"]]
     assert n0 == n1
     assert n0 == n2
 

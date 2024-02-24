@@ -241,12 +241,12 @@ func ValidateInputOutput(
 	// acceptedTokens are the tokens accepted as input or output of the swap.
 	acceptedTokens := []string{stakingDenom, osmoIBCDenom}
 
-	// Check that the input token is aevmos or uosmo.
+	// Check that the input token is egax or uosmo.
 	if !slices.Contains(acceptedTokens, inputDenom) {
 		return fmt.Errorf(ErrDenomNotSupported, acceptedTokens)
 	}
 
-	// Check that the output token is aevmos or uosmo.
+	// Check that the output token is egax or uosmo.
 	if !slices.Contains(acceptedTokens, outputDenom) {
 		return fmt.Errorf(ErrDenomNotSupported, acceptedTokens)
 	}
@@ -255,7 +255,7 @@ func ValidateInputOutput(
 }
 
 // ConvertToOsmosisRepresentation returns the Osmosis representation of the denom from the Evmos
-// representation of aevmos and uosmo. Return an error if the denom is different from one these two.
+// representation of egax and uosmo. Return an error if the denom is different from one these two.
 func ConvertToOsmosisRepresentation(
 	denom, stakingDenom string,
 	evmosChannel, osmosisChannel IBCChannel,

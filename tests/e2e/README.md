@@ -50,7 +50,7 @@ MOUNT_PATH
 
 # '--chain-id' evmos cli parameter, used to start nodes with a specific
 # chain-id and submit proposals
-# By default this is 'evmos_9000-1'
+# By default this is 'egax_5438-1'
 CHAIN_ID
 ```
 

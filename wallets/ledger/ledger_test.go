@@ -218,7 +218,7 @@ func (suite *LedgerTestSuite) TestGetAddressPubKeySECP256K1() {
 	suite.Require().NoError(err)
 
 	addr := crypto.PubkeyToAddress(privKey.PublicKey)
-	expAddr, err := sdk.Bech32ifyAddressBytes("evmos", common.HexToAddress(addr.String()).Bytes())
+	expAddr, err := sdk.Bech32ifyAddressBytes("egax", common.HexToAddress(addr.String()).Bytes())
 	suite.Require().NoError(err)
 
 	testCases := []struct {

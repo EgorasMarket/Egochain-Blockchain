@@ -1,7 +1,7 @@
 local config = import 'default.jsonnet';
 
 config {
-  'evmos_9000-1'+: {
+  'egax_5438-1'+: {
     validators: super.validators[0:1] + [{
       name: 'fullnode',
     }],

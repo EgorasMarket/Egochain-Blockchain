@@ -45,7 +45,8 @@ class Evmos:
                     web3.providers.WebsocketProvider(self.w3_ws_endpoint)
                 )
             else:
-                self._w3 = web3.Web3(web3.providers.HTTPProvider(self.w3_http_endpoint))
+                self._w3 = web3.Web3(
+                    web3.providers.HTTPProvider(self.w3_http_endpoint))
         return self._w3
 
     def base_port(self, i):
@@ -120,7 +121,8 @@ def setup_evmos(path, base_port, long_timeout_commit=False):
 # for the nodes
 def create_snapshots_dir(path, base_port, config, n_nodes=2):
     for idx in range(n_nodes):
-        data_snapshots_dir = path / "evmos_9000-1" / f"node{idx}" / "data" / "snapshots"
+        data_snapshots_dir = path / "egax_5438-1" / \
+            f"node{idx}" / "data" / "snapshots"
         os.makedirs(data_snapshots_dir, exist_ok=True)
 
 
@@ -163,7 +165,8 @@ def setup_geth(path, base_port):
         )
         try:
             wait_for_port(base_port)
-            w3 = web3.Web3(web3.providers.HTTPProvider(f"http://127.0.0.1:{base_port}"))
+            w3 = web3.Web3(web3.providers.HTTPProvider(
+                f"http://127.0.0.1:{base_port}"))
             w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             yield Geth(w3)
         finally:
@@ -199,7 +202,7 @@ def setup_custom_evmos(
             wait_for_port(ports.evmrpc_port(base_port))
             wait_for_port(ports.evmrpc_ws_port(base_port))
         yield Evmos(
-            path / "evmos_9000-1", chain_binary=chain_binary or DEFAULT_CHAIN_BINARY
+            path / "egax_5438-1", chain_binary=chain_binary or DEFAULT_CHAIN_BINARY
         )
     finally:
         os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
@@ -219,6 +222,7 @@ def build_patched_evmosd(patch_nix_file):
     ]
     print(*cmd)
     return (
-        Path(subprocess.check_output(cmd, universal_newlines=True, text=True).strip())
+        Path(subprocess.check_output(
+            cmd, universal_newlines=True, text=True).strip())
         / "bin/evmosd"
     )

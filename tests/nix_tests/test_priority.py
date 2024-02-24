@@ -24,16 +24,16 @@ def custom_evmos_rocksdb(tmp_path_factory):
     yield from setup_evmos_rocksdb(path, 26810, long_timeout_commit=True)
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["egax", "evmos-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on evmos and
-    evmos built with rocksdb (memIAVL + versionDB)
+    run on egax and
+    egax built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield custom_evmos_rocksdb
     else:
         raise NotImplementedError
@@ -131,13 +131,17 @@ def test_priority(evmos_cluster):
     expect_priorities = [tx_priority(tx, base_fee) for _, tx in test_cases]
     assert expect_priorities == [0, 200000, 400000, 600000]
 
-    signed = [sign_transaction(w3, tx, key=KEYS[sender]) for sender, tx in test_cases]
+    signed = [sign_transaction(w3, tx, key=KEYS[sender])
+              for sender, tx in test_cases]
     # send the txs from low priority to high,
     # but the later sent txs should be included earlier.
-    txhashes = [w3.eth.send_raw_transaction(tx.rawTransaction) for tx in signed]
+    txhashes = [w3.eth.send_raw_transaction(
+        tx.rawTransaction) for tx in signed]
 
-    receipts = [w3.eth.wait_for_transaction_receipt(txhash) for txhash in txhashes]
-    assert all(receipt.status == 1 for receipt in receipts), "expect all txs success"
+    receipts = [w3.eth.wait_for_transaction_receipt(
+        txhash) for txhash in txhashes]
+    assert all(receipt.status ==
+               1 for receipt in receipts), "expect all txs success"
 
     # the later txs should be included earlier because of higher priority
     tx_indexes = [(r.blockNumber, r.transactionIndex) for r in receipts]
@@ -159,29 +163,29 @@ def test_native_tx_priority(evmos_cluster):
         {
             "from": eth_to_bech32(ADDRS["community"]),
             "to": eth_to_bech32(ADDRS["validator"]),
-            "amount": "1000aevmos",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}aevmos",
+            "amount": "1000egax",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
             "max_priority_price": 0,
         },
         {
             "from": eth_to_bech32(ADDRS["signer1"]),
             "to": eth_to_bech32(ADDRS["signer2"]),
-            "amount": "1000aevmos",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}aevmos",
+            "amount": "1000egax",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
             "max_priority_price": PRIORITY_REDUCTION * 200000,
         },
         {
             "from": eth_to_bech32(ADDRS["signer2"]),
             "to": eth_to_bech32(ADDRS["signer1"]),
-            "amount": "1000aevmos",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 400000}aevmos",
+            "amount": "1000egax",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 400000}egax",
             "max_priority_price": PRIORITY_REDUCTION * 400000,
         },
         {
             "from": eth_to_bech32(ADDRS["validator"]),
             "to": eth_to_bech32(ADDRS["community"]),
-            "amount": "1000aevmos",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}aevmos",
+            "amount": "1000egax",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
             "max_priority_price": None,  # no extension, maximum tipFeeCap
         },
     ]
@@ -200,7 +204,7 @@ def test_native_tx_priority(evmos_cluster):
                 tx, tc["from"], max_priority_price=tc.get("max_priority_price")
             )
         )
-        gas_price = int(tc["gas_prices"].removesuffix("aevmos"))
+        gas_price = int(tc["gas_prices"].removesuffix("egax"))
         expect_priorities.append(
             min(
                 get_max_priority_price(tc.get("max_priority_price")),
@@ -219,7 +223,8 @@ def test_native_tx_priority(evmos_cluster):
     print("wait for two new blocks, so the sent txs are all included")
     wait_for_new_blocks(cli, 2)
 
-    tx_results = [cli.tx_search_rpc(f"tx.hash='{txhash}'")[0] for txhash in txhashes]
+    tx_results = [cli.tx_search_rpc(f"tx.hash='{txhash}'")[
+        0] for txhash in txhashes]
     tx_indexes = [(int(r["height"]), r["index"]) for r in tx_results]
 
     # with mempool v1 (deprecated)

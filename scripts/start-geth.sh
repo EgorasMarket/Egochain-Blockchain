@@ -50,7 +50,7 @@ geth --datadir "$DATA" --password "$pwdfile" account import "$tmpfile"
 rm "$tmpfile"
 
 # start up
-geth --networkid 9000 --datadir "$DATA" --http --http.addr localhost --http.api 'personal,eth,net,web3,txpool,miner' \
+geth --networkid 5438 --datadir "$DATA" --http --http.addr localhost --http.api 'personal,eth,net,web3,txpool,miner' \
     -unlock '0x57f96e6b86cdefdb3d412547816a82e3e0ebf9d2' --password "$pwdfile" \
     --mine --miner.threads 1 --allow-insecure-unlock --ipcdisable \
     "$@"

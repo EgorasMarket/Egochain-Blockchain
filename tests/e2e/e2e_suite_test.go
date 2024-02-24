@@ -144,19 +144,19 @@ func (s *IntegrationTestSuite) proposeUpgrade(name, target string) {
 		s.upgradeParams.ChainID,
 		s.upgradeManager.UpgradeHeight,
 		isLegacyProposal,
-		"--fees=10000000000000000aevmos",
+		"--fees=10000000000000000egax",
 		"--gas=500000",
 	)
 	s.Require().NoErrorf(
 		err,
-		"can't create the proposal to upgrade Evmos to %s at height %d with name %s",
+		"can't create the proposal to upgrade Egochain to %s at height %d with name %s",
 		target, s.upgradeManager.UpgradeHeight, name,
 	)
 
 	outBuf, errBuf, err := s.upgradeManager.RunExec(ctx, exec)
 	s.Require().NoErrorf(
 		err,
-		"failed to submit proposal to upgrade Evmos to %s at height %d\nstdout: %s,\nstderr: %s",
+		"failed to submit proposal to upgrade Egochain to %s at height %d\nstdout: %s,\nstderr: %s",
 		target, s.upgradeManager.UpgradeHeight, outBuf.String(), errBuf.String(),
 	)
 
@@ -176,7 +176,7 @@ func (s *IntegrationTestSuite) proposeUpgrade(name, target string) {
 func (s *IntegrationTestSuite) voteForProposal(id int) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	exec, err := s.upgradeManager.CreateVoteProposalExec(s.upgradeParams.ChainID, id, "--fees=10000000000000000aevmos", "--gas=500000")
+	exec, err := s.upgradeManager.CreateVoteProposalExec(s.upgradeParams.ChainID, id, "--fees=10000000000000000egax", "--gas=500000")
 	s.Require().NoError(err, "can't create vote for proposal exec")
 	outBuf, errBuf, err := s.upgradeManager.RunExec(ctx, exec)
 	s.Require().NoErrorf(

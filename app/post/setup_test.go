@@ -85,7 +85,7 @@ func (s *PostTestSuite) BuildEthTx() sdk.Tx {
 
 	msgEthereumTx := evmtypes.NewTx(ethTxParams)
 	msgEthereumTx.From = s.from.String()
-	tx, err := msgEthereumTx.BuildTx(s.txBuilder, "evmos")
+	tx, err := msgEthereumTx.BuildTx(s.txBuilder, "egax")
 	s.Require().NoError(err)
 	return tx
 }

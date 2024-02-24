@@ -156,6 +156,6 @@ func RegisterMsgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 	return nil
 }
 
-var pattern_Msg_UpdateParams_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"evmos", "inflation", "v1", "tx", "update_params"}, "", runtime.AssumeColonVerbOpt(false)))
+var pattern_Msg_UpdateParams_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"egax", "inflation", "v1", "tx", "update_params"}, "", runtime.AssumeColonVerbOpt(false)))
 
 var forward_Msg_UpdateParams_0 = runtime.ForwardResponseMessage

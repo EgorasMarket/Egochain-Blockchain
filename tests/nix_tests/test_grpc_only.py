@@ -42,14 +42,14 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["egax", "evmos-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on evmos and
-    evmos built with rocksdb (memIAVL + versionDB)
+    run on egax and
+    egax built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
     elif provider == "evmos-rocksdb":
         yield custom_evmos_rocksdb
@@ -78,7 +78,7 @@ def test_grpc_mode(evmos_cluster: Evmos):
     """
     w3 = evmos_cluster.w3
     contract, _ = deploy_contract(w3, CONTRACTS["TestChainID"])
-    assert 9000 == contract.caller.currentChainID()
+    assert 5438 == contract.caller.currentChainID()
 
     msg = {
         "to": contract.address,
@@ -93,7 +93,7 @@ def test_grpc_mode(evmos_cluster: Evmos):
         rsp = grpc_eth_call(api_port, msg)
         ret = rsp["ret"]
         valid = ret is not None
-        if valid and 9000 == int.from_bytes(base64.b64decode(ret.encode()), "big"):
+        if valid and 5438 == int.from_bytes(base64.b64decode(ret.encode()), "big"):
             success = True
             break
         time.sleep(sleep)
@@ -101,7 +101,8 @@ def test_grpc_mode(evmos_cluster: Evmos):
     # wait 1 more block for both nodes to avoid node stopped before tnx get included
     for i in range(2):
         wait_for_block(evmos_cluster.cosmos_cli(i), 1)
-    supervisorctl(evmos_cluster.base_dir / "../tasks.ini", "stop", "evmos_9000-1-node1")
+    supervisorctl(evmos_cluster.base_dir / "../tasks.ini",
+                  "stop", "egax_5438-1-node1")
 
     # run grpc-only mode directly with existing chain state
     with (evmos_cluster.base_dir / "node1.log").open("a") as logfile:
@@ -123,14 +124,14 @@ def test_grpc_mode(evmos_cluster: Evmos):
             wait_for_port(api_port)
 
             # in grpc-only mode, grpc query don't work if we don't pass chain_id
-            rsp = grpc_eth_call(api_port, msg, chain_id=9000)
+            rsp = grpc_eth_call(api_port, msg, chain_id=5438)
 
             # Even after waiting for the grpc port to be ready,
             # the call gives error that the grpc server is still down
             # for this case, we'll retry the call
             while f"{grpc_port}: connect: connection refused" in rsp["message"]:
                 time.sleep(sleep + 1)
-                rsp = grpc_eth_call(api_port, msg, chain_id=9000)
+                rsp = grpc_eth_call(api_port, msg, chain_id=5438)
 
             # it doesn't work without proposer address
             assert rsp["code"] != 0, str(rsp)
@@ -145,7 +146,7 @@ def test_grpc_mode(evmos_cluster: Evmos):
             rsp = grpc_eth_call(
                 api_port,
                 msg,
-                chain_id="evmos_9000",
+                chain_id="egax_5438",
                 proposer_address=proposer_addr,
             )
             assert rsp["code"] != 0, str(rsp)
@@ -159,7 +160,8 @@ def test_grpc_mode(evmos_cluster: Evmos):
                 proposer_address=proposer_addr,
             )
             assert "code" not in rsp, str(rsp)
-            assert 100 == int.from_bytes(base64.b64decode(rsp["ret"].encode()), "big")
+            assert 100 == int.from_bytes(
+                base64.b64decode(rsp["ret"].encode()), "big")
         finally:
             proc.terminate()
             proc.wait()

@@ -840,7 +840,7 @@ class CosmosCLI:
         channel,  # src channel
         target_version,  # chain version number of target chain
         i=0,
-        fees="0aevmos",
+        fees="0egax",
     ):
         return json.loads(
             self.raw(

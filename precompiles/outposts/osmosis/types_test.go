@@ -40,7 +40,7 @@ func TestCreatePacketWithMemo(t *testing.T) {
 			windowSeconds:      30,
 			onFailedDelivery:   doNothing,
 			nextMemo:           "",
-			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"aevmos\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":\"do_nothing\"}}}}",
+			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"egax\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":\"do_nothing\"}}}}",
 		},
 		{
 			name:               "pass - correct string with memo",
@@ -51,7 +51,7 @@ func TestCreatePacketWithMemo(t *testing.T) {
 			windowSeconds:      30,
 			onFailedDelivery:   doNothing,
 			nextMemo:           "a next memo",
-			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"aevmos\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":\"do_nothing\",\"next_memo\":\"a next memo\"}}}}",
+			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"egax\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":\"do_nothing\",\"next_memo\":\"a next memo\"}}}}",
 		},
 		{
 			name:               "pass - correct string with memo and recovery address",
@@ -62,7 +62,7 @@ func TestCreatePacketWithMemo(t *testing.T) {
 			windowSeconds:      30,
 			onFailedDelivery:   osmosisoutpost.RecoveryAddress{"osmo1g8j7tgfam7kmj86zks5rcfxruf9lzp87u8mwdf"},
 			nextMemo:           "a next memo",
-			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"aevmos\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":{\"local_recovery_addr\":\"osmo1g8j7tgfam7kmj86zks5rcfxruf9lzp87u8mwdf\"},\"next_memo\":\"a next memo\"}}}}",
+			expMemo:            "{\"wasm\":{\"contract\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"msg\":{\"osmosis_swap\":{\"output_denom\":\"egax\",\"slippage\":{\"twap\":{\"slippage_percentage\":\"10\",\"window_seconds\":30}},\"receiver\":\"evmos1vl0x3xr0zwgrllhdzxxlkal7txnnk56q3552x7\",\"on_failed_delivery\":{\"local_recovery_addr\":\"osmo1g8j7tgfam7kmj86zks5rcfxruf9lzp87u8mwdf\"},\"next_memo\":\"a next memo\"}}}}",
 		},
 	}
 
@@ -323,7 +323,7 @@ func TestValidateInputOutput(t *testing.T) {
 			expPass:      true,
 		},
 		{
-			name:         "fail - input equal to output aevmos",
+			name:         "fail - input equal to output egax",
 			inputDenom:   utils.BaseDenom,
 			outputDenom:  utils.BaseDenom,
 			stakingDenom: utils.BaseDenom,
@@ -428,7 +428,7 @@ func TestConvertToOsmosisRepresentation(t *testing.T) {
 		errContains string
 	}{
 		{
-			name:     "pass - correct conversion of aevmos",
+			name:     "pass - correct conversion of egax",
 			denom:    utils.BaseDenom,
 			expPass:  true,
 			expDenom: "ibc/8EAC8061F4499F03D2D1419A3E73D346289AE9DB89CAB1486B72539572B1915E",

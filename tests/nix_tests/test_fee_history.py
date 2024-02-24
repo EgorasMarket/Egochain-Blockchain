@@ -19,15 +19,15 @@ def custom_evmos_rocksdb(tmp_path_factory):
     yield from setup_evmos_rocksdb(path, 26510)
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb", "geth"])
+@pytest.fixture(scope="module", params=["egax", "egax-rocksdb", "geth"])
 def cluster(request, custom_evmos, custom_evmos_rocksdb, geth):
     """
     run on evmos, evmos built with rocksdb and geth
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield custom_evmos_rocksdb
     elif provider == "geth":
         yield geth
@@ -63,7 +63,8 @@ def test_basic(cluster):
             tasks = [
                 exec.submit(call, method, [size, b, percentiles]) for b in tc["blocks"]
             ]
-            res = [future.result()["result"][field] for future in as_completed(tasks)]
+            res = [future.result()["result"][field]
+                   for future in as_completed(tasks)]
         assert len(res) == len(tc["blocks"])
         assert res[0] == res[1]
         assert len(res[0]) == tc["expect"]

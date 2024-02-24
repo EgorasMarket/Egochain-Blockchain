@@ -160,7 +160,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 - (werc20-precompile) [#2057](https://github.com/evmos/evmos/pull/2057) WERC-20 refactors and handling of fallback and receive functions.
 - (werc20-precompile) [#2059](https://github.com/evmos/evmos/pull/2059) Add WERC-20 base integration tests.
 - (werc20-precompile) [#2062](https://github.com/evmos/evmos/pull/2062) Remove name checking for `fallback` and `receive` functions.
-- (osmosis-outpost) [#2063](https://github.com/evmos/evmos/pull/2063) Check that receiver address is bech32 with "evmos" as human readable part.
+- (osmosis-outpost) [#2063](https://github.com/evmos/evmos/pull/2063) Check that receiver address is bech32 with "egax" as human readable part.
 - (precompiles) [#2064](https://github.com/evmos/evmos/pull/2064) Handle all `fallback` and `receive` function cases.
 - (erc20-precompile) [#2066](https://github.com/evmos/evmos/pull/2066) Adjust ERC-20 EVM extension allowance behavior to align with standard ERC-20 smart contracts.
 - (erc20-precompile) [#2067](https://github.com/evmos/evmos/pull/2067) Further alignments between ERC-20 smart contracts and EVM extension.
@@ -411,7 +411,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 ### Improvements
 
-- (tests) [#1434](https://github.com/evmos/evmos/pull/1434) Set default staking denom to `aevmos` in `evm` and `feemarket` tests.
+- (tests) [#1434](https://github.com/evmos/evmos/pull/1434) Set default staking denom to `egax` in `evm` and `feemarket` tests.
 - (tests) [#1402](https://github.com/evmos/evmos/pull/1402) Refactor NewTx function arguments.
 - (tests) [#1415](https://github.com/evmos/evmos/pull/1415) Refactor InvalidTx type and NextFn used in AnteHandler tests.
 - (vesting) [#1400](https://github.com/evmos/evmos/pull/1400) Add convert vesting account message.
@@ -427,7 +427,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 - (claims) [#1126](https://github.com/evmos/evmos/pull/1126) Remove old x/params migration logic.
 - (vesting) [#1155](https://github.com/evmos/evmos/pull/1155) Migrate deprecated event emitting to new `TypedEvent`.
 - (docs) [#1361](https://github.com/evmos/evmos/pull/1361) Update `vesting` module docs with new behavior for `ClawbackVestingAccounts`.
-- (evm) [#1349](https://github.com/evmos/evmos/pull/1349) Restrict the Evmos codebase from working with chain IDs other than `9000` and `9001`.
+- (evm) [#1349](https://github.com/evmos/evmos/pull/1349) Restrict the Evmos codebase from working with chain IDs other than `5438` and `5439`.
 - (tests) [#1352](https://github.com/evmos/evmos/pull/1352) Deprecate usage of `aphoton` as denomination on tests.
 - (tests) [#1369](https://github.com/evmos/evmos/pull/1369) Refactor code to use `BaseDenom` for simplification.
 - (cli) [#1371](https://github.com/evmos/evmos/pull/1371) Improve CLI error messages.
@@ -718,7 +718,7 @@ Ref: https://keepachangelog.com/en/1.0.0/
 - (ci) [#564](https://github.com/evmos/evmos/pull/564) Add one-click development environment.
 - (erc20) [#556](https://github.com/evmos/evmos/pull/556) Remove deprecated migrations.
 - (incentives) [#551](https://github.com/evmos/evmos/pull/551) Add additional check to only distribute incentives to EOAs.
-- (cli) [#543](https://github.com/evmos/evmos/pull/543) Update mainnet default `min-gas-price` to `0.0025aevmos`.
+- (cli) [#543](https://github.com/evmos/evmos/pull/543) Update mainnet default `min-gas-price` to `0.0025egax`.
 - (epochs) [#539](https://github.com/evmos/evmos/pull/539) Use constants for epoch identifiers.
 
 ### Bug Fixes

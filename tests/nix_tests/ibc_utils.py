@@ -22,7 +22,7 @@ from .utils import (
     wait_for_port,
 )
 
-# aevmos IBC representation on another chain connected via channel-0.
+# egax IBC representation on another chain connected via channel-0.
 EVMOS_IBC_DENOM = "ibc/8EAC8061F4499F03D2D1419A3E73D346289AE9DB89CAB1486B72539572B1915E"
 # uosmo IBC representation on the Evmos chain.
 OSMO_IBC_DENOM = "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518"
@@ -30,15 +30,15 @@ OSMO_IBC_DENOM = "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F9771
 RATIO = 10**10
 # IBC_CHAINS_META metadata of cosmos chains to setup these for IBC tests
 IBC_CHAINS_META = {
-    "evmos": {
-        "chain_name": "evmos_9000-1",
+    "egax": {
+        "chain_name": "egax_5438-1",
         "bin": "evmosd",
-        "denom": "aevmos",
+        "denom": "egax",
     },
     "evmos-rocksdb": {
-        "chain_name": "evmos_9000-1",
+        "chain_name": "egax_5438-1",
         "bin": "evmosd-rocksdb",
-        "denom": "aevmos",
+        "denom": "egax",
     },
     "chainmain": {
         "chain_name": "chainmain-1",
@@ -61,7 +61,7 @@ IBC_CHAINS_META = {
         "denom": "uatom",
     },
 }
-EVM_CHAINS = ["evmos_9000", "chainmain-1"]
+EVM_CHAINS = ["egax_5438", "chainmain-1"]
 
 
 class IBCNetwork(NamedTuple):
@@ -134,7 +134,7 @@ def prepare_network(
 
         # evmos is the first chain
         # set it up and the relayer
-        if "evmos" in chain_name:
+        if "egax" in chain_name:
             # setup evmos with the custom config
             # depending on the build
             gen = get_evmos_generator(
@@ -149,7 +149,7 @@ def prepare_network(
             wait_for_port(ports.grpc_port(evmos.base_port(0)))  # evmos grpc
             # setup relayer
             hermes = Hermes(tmp_path / "relayer.toml")
-            chains = {"evmos": evmos}
+            chains = {"egax": evmos}
             continue
 
         chain_instance = CosmosChain(tmp_path / chain_name, meta["bin"])
@@ -180,7 +180,7 @@ def prepare_network(
 
     # Nested loop to connect all chains with each other
     for i, chain_a in enumerate(chains_to_connect):
-        for chain_b in chains_to_connect[i + 1 :]:
+        for chain_b in chains_to_connect[i + 1:]:
             subprocess.check_call(
                 [
                     "hermes",
@@ -216,9 +216,9 @@ def assert_ready(ibc):
 
 def hermes_transfer(ibc, other_chain_name="chainmain-1", other_chain_denom="basecro"):
     assert_ready(ibc)
-    # chainmain-1 -> evmos_9000-1
+    # chainmain-1 -> egax_5438-1
     my_ibc0 = other_chain_name
-    my_ibc1 = "evmos_9000-1"
+    my_ibc1 = "egax_5438-1"
     my_channel = "channel-0"
     dst_addr = eth_to_bech32(ADDRS["signer2"])
     src_amount = 10

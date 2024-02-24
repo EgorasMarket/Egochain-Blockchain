@@ -46,7 +46,7 @@ transaction of economic value.
 "Designated Blockchains" refers to the version of the digital blockchain ledger
 that, at any given time, is recognized as canonical in accordance with the
 blockchain consensus.The initial Designated Blockchains shall be the Evmos
-blockchains, identified by chain identifiers 9000 (testing network or testnet)
+blockchains, identified by chain identifiers 5438 (testing network or testnet)
 and 9001 (main network or mainnet).
 
 Apart from Evmos repository, Evmos is currently building the Evmos Software

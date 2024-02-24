@@ -656,7 +656,7 @@ func (suite *KeeperTestSuite) TestAddLog() {
 	msg2.From = addr.Hex()
 
 	ethTx3Params := &types.EvmTxArgs{
-		ChainID:   big.NewInt(9000),
+		ChainID:   big.NewInt(5438),
 		Nonce:     0,
 		To:        &suite.address,
 		Amount:    big.NewInt(1),

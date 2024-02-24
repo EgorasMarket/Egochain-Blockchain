@@ -4,8 +4,9 @@ def test_single_request_netversion(evmos_cluster):
 
     response = eth_ws.make_request("net_version", [])
 
-    # net_version should be 9000
-    assert response["result"] == "9000", "got " + response["result"] + ", expected 9000"
+    # net_version should be 5438
+    assert response["result"] == "5438", "got " + \
+        response["result"] + ", expected 5438"
 
 
 # note:

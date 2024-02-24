@@ -94,7 +94,7 @@ func (its *IntegrationTestSuite) TestDeleteIncentivesProposals() {
 		Title:       "Test",
 		Description: "Test Register Incentive Proposal",
 		Contract:    utiltx.GenerateAddress().String(),
-		Allocations: sdk.DecCoins{sdk.NewDecCoinFromDec("aevmos", sdk.NewDecWithPrec(5, 2))},
+		Allocations: sdk.DecCoins{sdk.NewDecCoinFromDec("egax", sdk.NewDecWithPrec(5, 2))},
 		Epochs:      100,
 	}
 

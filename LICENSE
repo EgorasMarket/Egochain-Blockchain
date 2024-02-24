@@ -50,7 +50,7 @@ updated from time to time.
 that, at any given time, is recognized as canonical in accordance with the
 blockchain consensus. The initial Designated Blockchains shall be the Evmos
 blockchains, identified by the Ethereum Improvement Proposal 155 (EIP-155)
-chain identifiers 9000 (testing network or "testnet") and 9001 (main network
+chain identifiers 5438 (testing network or "testnet") and 9001 (main network
 or mainnet).
 
 A “Evmos Product” is any product or service offered by the Company or its

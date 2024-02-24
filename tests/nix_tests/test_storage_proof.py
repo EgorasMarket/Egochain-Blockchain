@@ -16,16 +16,16 @@ def custom_evmos_rocksdb(tmp_path_factory):
     yield from setup_evmos_rocksdb(path, 26810)
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb", "geth"])
+@pytest.fixture(scope="module", params=["egax", "egax-rocksdb", "geth"])
 def cluster(request, custom_evmos, custom_evmos_rocksdb, geth):
     """
     run on both evmos (default build and rocksdb)
     and geth
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield custom_evmos
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield custom_evmos_rocksdb
     elif provider == "geth":
         yield geth
@@ -47,7 +47,8 @@ def test_basic(cluster):
     storage_keys = ["0x0", "0x1"]
     proof = (
         cluster.w3.provider.make_request(
-            method, [res["contractAddress"], storage_keys, hex(res["blockNumber"])]
+            method, [res["contractAddress"],
+                     storage_keys, hex(res["blockNumber"])]
         )
     )["result"]
     for proof in proof["storageProof"]:

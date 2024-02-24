@@ -29,10 +29,11 @@ from .utils import (
 # This contract address is provided in genesis
 # as registered token pair. If need to edit this
 # do so in 'osmosis-outpost.jsonnet' file
-WOSMO_ADDRESS = Web3.toChecksumAddress("0x5db67696C3c088DfBf588d3dd849f44266ff0ffa")
+WOSMO_ADDRESS = Web3.toChecksumAddress(
+    "0x5db67696C3c088DfBf588d3dd849f44266ff0ffa")
 
 
-@pytest.fixture(scope="module", params=["evmos"])
+@pytest.fixture(scope="module", params=["egax"])
 def ibc(request, tmp_path_factory):
     """
     Prepares the network.
@@ -47,7 +48,7 @@ def ibc(request, tmp_path_factory):
 
 def test_osmosis_swap(ibc):
     assert_ready(ibc)
-    evmos: Evmos = ibc.chains["evmos"]
+    evmos: Evmos = ibc.chains["egax"]
     osmosis: CosmosChain = ibc.chains["osmosis"]
 
     evmos_addr = ADDRS["signer2"]
@@ -56,7 +57,7 @@ def test_osmosis_swap(ibc):
     osmosis_addr = osmosis_cli.address("signer2")
     amt = 100
     # the expected amount to get after swapping
-    # 100aevmos is 98uosmo
+    # 100egax is 98uosmo
     exp_swap_amount = 98
 
     xcs_contract = setup_osmos_chains(ibc)
@@ -128,7 +129,7 @@ def setup_osmos_chains(ibc):
             "get_instantiate_params": lambda x: f'\'{{"owner":"{x}"}}\'',
         },
         "CrosschainSwap": {
-            "get_instantiate_params": lambda x, y, z: f'{{"governor":"{x}", "swap_contract": "{y}", "channels": [["evmos","{z}"]]}}',  # noqa: 501 - ignore line length lint
+            "get_instantiate_params": lambda x, y, z: f'{{"governor":"{x}", "swap_contract": "{y}", "channels": [["egax","{z}"]]}}',  # noqa: 501 - ignore line length lint
         },
     }
 
@@ -138,7 +139,8 @@ def setup_osmos_chains(ibc):
         osmosis_cli,
         osmosis_addr,
         swap_contract,
-        contracts_to_store["Swaprouter"]["get_instantiate_params"](osmosis_addr),
+        contracts_to_store["Swaprouter"]["get_instantiate_params"](
+            osmosis_addr),
         "swaprouter1.0",
     )
 
@@ -156,7 +158,7 @@ def setup_osmos_chains(ibc):
     # =================================
 
     # in the router one execute function `set_route` to have a route for evmos within the swap router contract
-    # set input 'aevmos', output 'uosmo' route
+    # set input 'egax', output 'uosmo' route
     set_swap_route(
         osmosis_cli, osmosis_addr, swap_contract_addr, pool_id, EVMOS_IBC_DENOM, "uosmo"
     )
@@ -165,7 +167,7 @@ def setup_osmos_chains(ibc):
 
 
 def send_evmos_to_osmos(ibc):
-    src_chain = ibc.chains["evmos"]
+    src_chain = ibc.chains["egax"]
     dst_chain = ibc.chains["osmosis"]
 
     dst_addr = dst_chain.cosmos_cli().address("signer2")
@@ -173,7 +175,7 @@ def send_evmos_to_osmos(ibc):
 
     cli = src_chain.cosmos_cli()
     src_addr = cli.address("signer2")
-    src_denom = "aevmos"
+    src_denom = "egax"
 
     old_src_balance = get_balance(src_chain, src_addr, src_denom)
     old_dst_balance = get_balance(dst_chain, dst_addr, EVMOS_IBC_DENOM)
@@ -216,7 +218,7 @@ def send_evmos_to_osmos(ibc):
 
 def transfer_osmo_to_evmos(ibc, src_addr, dst_addr):
     src_chain: CosmosChain = ibc.chains["osmosis"]
-    dst_chain: Evmos = ibc.chains["evmos"]
+    dst_chain: Evmos = ibc.chains["egax"]
 
     cli = src_chain.cosmos_cli()
     src_addr = cli.address("signer2")
@@ -257,7 +259,8 @@ def deploy_wasm_contract(osmosis_cli, deployer_addr, contract_file, init_args, l
     assert receipt["tx_result"]["code"] == 0
     # get code_id from the receipt logs
     logs = json.loads(receipt["tx_result"]["log"])
-    code_id = get_event_attribute_value(logs[0]["events"], "store_code", "code_id")
+    code_id = get_event_attribute_value(
+        logs[0]["events"], "store_code", "code_id")
 
     # 2. instantiate contract
     rsp = osmosis_cli.wasm_instante2(
@@ -287,7 +290,8 @@ def set_swap_route(
 ):
     execute_args = f'{{"set_route":{{"input_denom": "{input_denom}","output_denom":"{output_denom}","pool_route":[{{"pool_id": "{pool_id}","token_out_denom":"{output_denom}"}}]}}}}'  # noqa: 501 - ignore line length lint
 
-    rsp = osmosis_cli.wasm_execute(signer_addr, swap_contract_addr, execute_args)
+    rsp = osmosis_cli.wasm_execute(
+        signer_addr, swap_contract_addr, execute_args)
     assert rsp["code"] == 0
 
     # check for tx receipt to confirm tx was successful
@@ -305,6 +309,7 @@ def create_osmosis_pool(osmosis_cli, creator_addr, pool_meta_file):
 
     # get pool id from events in logs
     logs = json.loads(receipt["tx_result"]["log"])
-    pool_id = get_event_attribute_value(logs[0]["events"], "pool_created", "pool_id")
+    pool_id = get_event_attribute_value(
+        logs[0]["events"], "pool_created", "pool_id")
     print(f"created osmosis pool with id: {pool_id}")
     return pool_id

@@ -4,18 +4,18 @@
       "description": "The native staking and governance token of the Evmos chain",
       "denom_units": [
         {
-          "denom": "aevmos",
+          "denom": "egax",
           "exponent": 0
         },
         {
-          "denom": "evmos",
+          "denom": "egax",
           "exponent": 18
         }
       ],
-      "base": "aevmos",
-      "display": "aevmos",
-      "name": "aevmos",
-      "symbol": "EVMOS"
+      "base": "egax",
+      "display": "egax",
+      "name": "egax",
+      "symbol": "EGAX"
     },
     {
       "description": "The native staking and governance token of the Osmosis chain",

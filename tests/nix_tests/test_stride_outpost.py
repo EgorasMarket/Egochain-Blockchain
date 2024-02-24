@@ -12,7 +12,7 @@ from .utils import (
 )
 
 
-@pytest.fixture(scope="module", params=["evmos"])
+@pytest.fixture(scope="module", params=["egax"])
 def ibc(request, tmp_path_factory):
     "prepare-network"
     name = "stride-outpost"
@@ -30,32 +30,32 @@ def test_liquid_stake(ibc):
     """
     assert_ready(ibc)
 
-    cli = ibc.chains["evmos"].cosmos_cli()
+    cli = ibc.chains["egax"].cosmos_cli()
     src_addr = cli.address("signer2")
     sender_addr = ADDRS["signer2"]
-    src_denom = "aevmos"
-    st_token = "staevmos"
+    src_denom = "egax"
+    st_token = "stegax"
     amt = 1000000000000000000
 
     dst_addr = ibc.chains["stride"].cosmos_cli().address("signer2")
 
-    # need to register evmos chain as host zone in stride
+    # need to register egax chain as host zone in stride
     register_host_zone(
         ibc.chains["stride"],
         dst_addr,
         "connection-0",
         src_denom,
-        "evmos",
+        "egax",
         EVMOS_IBC_DENOM,
         "channel-0",
         1000000,
     )
 
-    old_src_balance = get_balance(ibc.chains["evmos"], src_addr, src_denom)
+    old_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
     old_dst_balance = get_balance(ibc.chains["stride"], dst_addr, st_token)
 
-    pc = get_precompile_contract(ibc.chains["evmos"].w3, "IStrideOutpost")
-    evmos_gas_price = ibc.chains["evmos"].w3.eth.gas_price
+    pc = get_precompile_contract(ibc.chains["egax"].w3, "IStrideOutpost")
+    evmos_gas_price = ibc.chains["egax"].w3.eth.gas_price
 
     liquid_stake_params = {
         "channelID": "channel-0",
@@ -68,9 +68,9 @@ def test_liquid_stake(ibc):
     tx = pc.functions.liquidStake(liquid_stake_params).build_transaction(
         {"from": sender_addr, "gasPrice": evmos_gas_price}
     )
-    gas_estimation = ibc.chains["evmos"].w3.eth.estimate_gas(tx)
+    gas_estimation = ibc.chains["egax"].w3.eth.estimate_gas(tx)
 
-    receipt = send_transaction(ibc.chains["evmos"].w3, tx, KEYS["signer2"])
+    receipt = send_transaction(ibc.chains["egax"].w3, tx, KEYS["signer2"])
     assert receipt.status == 1
 
     # FIXME gasUsed should be same as estimation
@@ -91,7 +91,7 @@ def test_liquid_stake(ibc):
 
     wait_for_fn("balance change", check_balance_change)
     assert old_dst_balance + amt == new_dst_balance
-    new_src_balance = get_balance(ibc.chains["evmos"], src_addr, src_denom)
-    # NOTE the 'amt' is deducted from the 'aevmos' native coin
+    new_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+    # NOTE the 'amt' is deducted from the 'egax' native coin
     # not from WEVMOS balance
     assert old_src_balance - amt - fee == new_src_balance

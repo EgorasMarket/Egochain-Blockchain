@@ -283,7 +283,7 @@ func setDefaultAuthGenesisState(
 func setDefaultGovGenesisState(evmosApp *app.Evmos, genesisState simapp.GenesisState) simapp.GenesisState {
 	govGen := govtypesv1.DefaultGenesisState()
 	updatedParams := govGen.Params
-	// set 'aevmos' as deposit denom
+	// set 'egax' as deposit denom
 	updatedParams.MinDeposit = sdktypes.NewCoins(sdktypes.NewCoin(evmosutil.BaseDenom, sdkmath.NewInt(1e18)))
 	govGen.Params = updatedParams
 	genesisState[govtypes.ModuleName] = evmosApp.AppCodec().MustMarshalJSON(govGen)

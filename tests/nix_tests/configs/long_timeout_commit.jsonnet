@@ -1,7 +1,7 @@
 local default = import 'default.jsonnet';
 
 default {
-  'evmos_9000-1'+: {
+  'egax_5438-1'+: {
     config+: {
       consensus+: {
         timeout_commit: '5s',

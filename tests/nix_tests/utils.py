@@ -29,9 +29,10 @@ ACCOUNTS = {
 }
 KEYS = {name: account.key for name, account in ACCOUNTS.items()}
 ADDRS = {name: account.address for name, account in ACCOUNTS.items()}
-EVMOS_ADDRESS_PREFIX = "evmos"
-DEFAULT_DENOM = "aevmos"
-WEVMOS_ADDRESS = Web3.toChecksumAddress("0xcc491f589b45d4a3c679016195b3fb87d7848210")
+EVMOS_ADDRESS_PREFIX = "egax"
+DEFAULT_DENOM = "egax"
+WEVMOS_ADDRESS = Web3.toChecksumAddress(
+    "0xcc491f589b45d4a3c679016195b3fb87d7848210")
 TEST_CONTRACTS = {
     "TestERC20A": "TestERC20A.sol",
     "Greeter": "Greeter.sol",
@@ -111,7 +112,8 @@ def w3_wait_for_new_blocks(w3, n, sleep=0.5):
 
 
 def wait_for_new_blocks(cli, n, sleep=0.5):
-    cur_height = begin_height = int((cli.status())["SyncInfo"]["latest_block_height"])
+    cur_height = begin_height = int(
+        (cli.status())["SyncInfo"]["latest_block_height"])
     while cur_height - begin_height < n:
         time.sleep(sleep)
         cur_height = int((cli.status())["SyncInfo"]["latest_block_height"])
@@ -183,7 +185,8 @@ def approve_proposal(n, proposal_id, **kwargs):
     cli = n.cosmos_cli()
 
     for i in range(len(n.config["validators"])):
-        rsp = n.cosmos_cli(i).gov_vote("validator", proposal_id, "yes", **kwargs)
+        rsp = n.cosmos_cli(i).gov_vote(
+            "validator", proposal_id, "yes", **kwargs)
         assert rsp["code"] == 0, rsp["raw_log"]
     wait_for_new_blocks(cli, 1)
     assert (
@@ -417,7 +420,7 @@ local default = import '{tests_dir}/configs/{file_name}.jsonnet';
 
 default {{
   dotenv: '{root_dir}/scripts/.env',
-  'evmos_9000-1'+: {{
+  'egax_5438-1'+: {{
     cmd: 'evmosd-rocksdb',
     'app-config'+: {{
       'app-db-backend': 'rocksdb',
@@ -462,7 +465,7 @@ def update_node_cmd(path, cmd, i):
     ini = configparser.RawConfigParser()
     ini.read(ini_path)
     for section in ini.sections():
-        if section == f"program:evmos_9000-1-node{i}":
+        if section == f"program:egax_5438-1-node{i}":
             ini[section].update(
                 {
                     "command": f"{cmd} start --home %(here)s/node{i}",
@@ -492,7 +495,7 @@ def update_evmos_bin(modified_bin, nodes=[0, 1]):
     """
 
     def inner(path, base_port, config):
-        chain_id = "evmos_9000-1"
+        chain_id = "egax_5438-1"
         # by default, there're 2 nodes
         # need to update the bin in all these
         for i in nodes:

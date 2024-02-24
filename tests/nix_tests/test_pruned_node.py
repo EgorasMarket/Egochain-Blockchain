@@ -32,7 +32,7 @@ def pruned(tmp_path_factory):
 @pytest.fixture(scope="module")
 def pruned_rocksdb(tmp_path_factory):
     """
-    setup evmos with memIAVL + versionDB
+    setup egax with memIAVL + versionDB
     and 'pruning = everything'
     """
     yield from setup_custom_evmos(
@@ -44,16 +44,16 @@ def pruned_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["evmos", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["egax", "egax-rocksdb"])
 def pruned_cluster(request, pruned, pruned_rocksdb):
     """
-    run on evmos and
-    evmos built with rocksdb (memIAVL + versionDB)
+    run on egax and
+    egax built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "evmos":
+    if provider == "egax":
         yield pruned
-    elif provider == "evmos-rocksdb":
+    elif provider == "egax-rocksdb":
         yield pruned_rocksdb
     else:
         raise NotImplementedError
@@ -85,7 +85,8 @@ def test_pruned_node(pruned_cluster):
         "address": erc20.address,
         "topics": [
             HexBytes(
-                abi.event_signature_to_log_topic("Transfer(address,address,uint256)")
+                abi.event_signature_to_log_topic(
+                    "Transfer(address,address,uint256)")
             ),
             HexBytes(b"\x00" * 12 + HexBytes(ADDRS["validator"])),
             HexBytes(b"\x00" * 12 + HexBytes(ADDRS["community"])),
@@ -148,7 +149,7 @@ def test_pruned_node(pruned_cluster):
             "value": 0,
             "type": 2,
             "accessList": [],
-            "chainId": 9000,
+            "chainId": 5438,
         }
     )
     assert tx1 == tx2
