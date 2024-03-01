@@ -30,9 +30,9 @@ const (
 
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
-	DisplayDenom = "egax"
+	DisplayDenom = "Ego"
 	// BaseDenom defines to the default denomination used in Evmos (staking, EVM, governance, etc.)
-	BaseDenom = "egax"
+	BaseDenom = "Ego"
 )
 
 // SetBech32Prefixes sets the global prefixes to be used when serializing addresses and public keys to Bech32 strings.
