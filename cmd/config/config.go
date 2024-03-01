@@ -30,7 +30,7 @@ const (
 
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
-	DisplayDenom = "egax"
+	DisplayDenom = "EGAX"
 	// BaseDenom defines to the default denomination used in Evmos (staking, EVM, governance, etc.)
 	BaseDenom = "egax"
 )
