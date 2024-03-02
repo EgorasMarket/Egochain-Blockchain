@@ -6,10 +6,10 @@ TMVERSION := $(shell go list -m github.com/cometbft/cometbft | sed 's:.* ::')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 BINDIR ?= $(GOPATH)/bin
-EVMOS_BINARY = evmosd
+EVMOS_BINARY = egaxd
 EVMOS_DIR = evmos
 BUILDDIR ?= $(CURDIR)/build
-HTTPS_GIT := https://github.com/evmos/evmos.git
+HTTPS_GIT := https://github.com/EgorasMarket/Egochain-Blockchain.git
 DOCKER := $(shell which docker)
 DOCKER_BUILDKIT=1
 DOCKER_ARGS=
