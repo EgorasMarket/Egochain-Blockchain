@@ -187,6 +187,7 @@ func init() {
 // Name defines the application binary name
 const Name = "egaxd"
 
+
 var (
 	// DefaultNodeHome default home directories for the application daemon
 	DefaultNodeHome string
