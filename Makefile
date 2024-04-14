@@ -141,7 +141,9 @@ endif
 
 BUILD_TARGETS := build install
 
+
 build: BUILD_ARGS=-o $(BUILDDIR)/
+
 build-linux:
 	GOOS=linux GOARCH=amd64 LEDGER_ENABLED=false $(MAKE) build
 
@@ -613,3 +615,4 @@ check-changelog:
 fix-changelog:
 	@echo "Fixing changelog..."
 	@python3 scripts/changelog_checker/check_changelog.py ./CHANGELOG.md --fix
+
