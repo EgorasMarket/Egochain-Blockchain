@@ -49,7 +49,7 @@ import (
 	pruningtypes "github.com/cosmos/cosmos-sdk/store/pruning/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v16/cmd/evmosd/opendb"
+	"github.com/evmos/evmos/v16/cmd/egaxd/opendb"
 	"github.com/evmos/evmos/v16/indexer"
 	ethdebug "github.com/evmos/evmos/v16/rpc/namespaces/ethereum/debug"
 	"github.com/evmos/evmos/v16/server/config"
