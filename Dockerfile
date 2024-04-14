@@ -19,15 +19,15 @@ RUN mkdir -p /target/usr/lib /target/usr/local/lib /target/usr/include
 
 RUN if [ "$DB_BACKEND" = "pebbledb" ]; then \
     make build-pebbledb; \
-elif [ "$DB_BACKEND" = "rocksdb" ]; then \
-   make build-rocksdb; \
-   cp -r /usr/lib/* /target/usr/lib/ && \
-   cp -r /usr/local/lib/* /target/usr/local/lib/ && \
-   cp -r /usr/include/* /target/usr/include/; \
-else \
+    elif [ "$DB_BACKEND" = "rocksdb" ]; then \
+    make build-rocksdb; \
+    cp -r /usr/lib/* /target/usr/lib/ && \
+    cp -r /usr/local/lib/* /target/usr/local/lib/ && \
+    cp -r /usr/include/* /target/usr/include/; \
+    else \
     # Build default binary (LevelDB)
     make build; \
-fi
+    fi
 
 RUN go install github.com/MinseokOh/toml-cli@latest
 
@@ -52,4 +52,5 @@ WORKDIR /home/evmos
 
 EXPOSE 26656 26657 1317 9090 8545 8546
 
-CMD ["evmosd"]
+
+CMD ["egaxd"]
