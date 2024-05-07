@@ -401,16 +401,10 @@ github.com/creachadair/taskgroup v0.4.2/go.mod h1:qiXUOSrbwAY3u0JPGTzObbE3yf9hcX
 github.com/creack/pty v1.1.7/go.mod h1:lj5s0c3V2DBrqTV7llrYr5NG6My20zk30Fl46Y7DoTY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/creack/pty v1.1.18 h1:n56/Zwd5o6whRC5PMGretI4IdRLlmBXYNjScPaBgsbY=
-github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20231027074119-c05c9c61c90e h1:1+NtTl/lzVNKXZUv41HYQ76gtxojDi6gbQrxM2lgDpo=
-github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20231027074119-c05c9c61c90e/go.mod h1:PMRblIxBPdkHeEw36YxCWLO0DylfmEJYIgmdo6VgwZo=
 github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20240129013154-12efd9b7643f h1:1iOcVkGzlyf69VmH0HRMa6Hx5RQQiV3ojdII6sqmtcc=
 github.com/crypto-org-chain/cronos/memiavl v0.0.5-0.20240129013154-12efd9b7643f/go.mod h1:b2P7ilsxOWAhl9augFxBeRVeqecnQtzqfzpqsglj5ik=
-github.com/crypto-org-chain/cronos/store v0.0.5-0.20231027074119-c05c9c61c90e h1:3mq9zn5+49covVejnfwPIIx0i6pzRXxKJzz4PuVVn9g=
-github.com/crypto-org-chain/cronos/store v0.0.5-0.20231027074119-c05c9c61c90e/go.mod h1:N6IfJDLTTo0vxyuY4MSMMX2TOdBd/tozpjnYGJmAfmE=
 github.com/crypto-org-chain/cronos/store v0.0.5-0.20240129013154-12efd9b7643f h1:A9n61ZEpG2HXOMJ0Q8EHGGzEAp9IUA4E9PiydqVeJy0=
 github.com/crypto-org-chain/cronos/store v0.0.5-0.20240129013154-12efd9b7643f/go.mod h1:puaAzL204Ni6axMuMNfZREz9gazZbhAbb4ksRhdLBdI=
-github.com/crypto-org-chain/cronos/versiondb v0.0.0-20231027074119-c05c9c61c90e h1:kN1HNLp2xmy8vIHpGWjsX8dCL6sXID2Tw4qZZk7XYd4=
-github.com/crypto-org-chain/cronos/versiondb v0.0.0-20231027074119-c05c9c61c90e/go.mod h1:8W9LCw+FhR2sFI+nkjSi0ItZ0IeSyUjc6CSvuaYTU2s=
 github.com/crypto-org-chain/cronos/versiondb v0.0.0-20240129013154-12efd9b7643f h1:crbxFPAPS4LaTSimB4JeZF8apfDYy39E2+JFGwFEKFQ=
 github.com/crypto-org-chain/cronos/versiondb v0.0.0-20240129013154-12efd9b7643f/go.mod h1:8L1WprpzpqIz6erpQjd/qOvMNpYDG4qzR5vWgAqv6Jw=
 github.com/cyphar/filepath-securejoin v0.2.3/go.mod h1:aPGpWjXOXUn2NCNjFvBE6aRxGGx79pTxQpKOJNYHHl4=
@@ -1825,8 +1819,8 @@ google.golang.org/protobuf v1.27.1/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQ
 google.golang.org/protobuf v1.28.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
 google.golang.org/protobuf v1.28.1/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
 google.golang.org/protobuf v1.30.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
-google.golang.org/protobuf v1.32.0 h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=
-google.golang.org/protobuf v1.32.0/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=
+google.golang.org/protobuf v1.34.1 h1:9ddQBjfCyZPOHPUiPxpYESBLc+T8P3E+Vo4IbKZgFWg=
+google.golang.org/protobuf v1.34.1/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=
 gopkg.in/alecthomas/kingpin.v2 v2.2.6/go.mod h1:FMv+mEhP44yOT+4EoQTLFTRgOQ1FBLkstjWtayDeSgw=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
