@@ -31,7 +31,7 @@ RUN if [ "$DB_BACKEND" = "pebbledb" ]; then \
 
 RUN go install github.com/MinseokOh/toml-cli@latest
 
-FROM alpine:3.19
+FROM alpine:3.20
 
 WORKDIR /root
 
