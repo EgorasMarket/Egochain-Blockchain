@@ -4,18 +4,18 @@
       "description": "The native staking and governance token of the Evmos chain",
       "denom_units": [
         {
-          "denom": "egax",
+          "denom": "dhives",
           "exponent": 0
         },
         {
-          "denom": "egax",
+          "denom": "dhives",
           "exponent": 18
         }
       ],
-      "base": "egax",
-      "display": "egax",
-      "name": "egax",
-      "symbol": "EGAX"
+      "base": "dhives",
+      "display": "dhives",
+      "name": "dhives",
+      "symbol": "DHIVES"
     }
   ]
 }

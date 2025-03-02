@@ -53,7 +53,7 @@ def test_rollback(custom_evmos):
 
     print("stop node1")
     supervisorctl(custom_evmos.base_dir / "../tasks.ini",
-                  "stop", "egax_5438-1-node1")
+                  "stop", "dhives_5438-1-node1")
 
     print("do rollback on node1")
     cli1.rollback()

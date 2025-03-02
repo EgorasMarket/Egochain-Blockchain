@@ -33,7 +33,7 @@ WOSMO_ADDRESS = Web3.toChecksumAddress(
     "0x5db67696C3c088DfBf588d3dd849f44266ff0ffa")
 
 
-@pytest.fixture(scope="module", params=["egax"])
+@pytest.fixture(scope="module", params=["dhives"])
 def ibc(request, tmp_path_factory):
     """
     Prepares the network.
@@ -48,7 +48,7 @@ def ibc(request, tmp_path_factory):
 
 def test_osmosis_swap(ibc):
     assert_ready(ibc)
-    evmos: Evmos = ibc.chains["egax"]
+    evmos: Evmos = ibc.chains["dhives"]
     osmosis: CosmosChain = ibc.chains["osmosis"]
 
     evmos_addr = ADDRS["signer2"]
@@ -57,7 +57,7 @@ def test_osmosis_swap(ibc):
     osmosis_addr = osmosis_cli.address("signer2")
     amt = 100
     # the expected amount to get after swapping
-    # 100egax is 98uosmo
+    # 100dhives is 98uosmo
     exp_swap_amount = 98
 
     xcs_contract = setup_osmos_chains(ibc)
@@ -129,7 +129,7 @@ def setup_osmos_chains(ibc):
             "get_instantiate_params": lambda x: f'\'{{"owner":"{x}"}}\'',
         },
         "CrosschainSwap": {
-            "get_instantiate_params": lambda x, y, z: f'{{"governor":"{x}", "swap_contract": "{y}", "channels": [["egax","{z}"]]}}',  # noqa: 501 - ignore line length lint
+            "get_instantiate_params": lambda x, y, z: f'{{"governor":"{x}", "swap_contract": "{y}", "channels": [["dhives","{z}"]]}}',  # noqa: 501 - ignore line length lint
         },
     }
 
@@ -158,7 +158,7 @@ def setup_osmos_chains(ibc):
     # =================================
 
     # in the router one execute function `set_route` to have a route for evmos within the swap router contract
-    # set input 'egax', output 'uosmo' route
+    # set input 'dhives', output 'uosmo' route
     set_swap_route(
         osmosis_cli, osmosis_addr, swap_contract_addr, pool_id, EVMOS_IBC_DENOM, "uosmo"
     )
@@ -167,7 +167,7 @@ def setup_osmos_chains(ibc):
 
 
 def send_evmos_to_osmos(ibc):
-    src_chain = ibc.chains["egax"]
+    src_chain = ibc.chains["dhives"]
     dst_chain = ibc.chains["osmosis"]
 
     dst_addr = dst_chain.cosmos_cli().address("signer2")
@@ -175,7 +175,7 @@ def send_evmos_to_osmos(ibc):
 
     cli = src_chain.cosmos_cli()
     src_addr = cli.address("signer2")
-    src_denom = "egax"
+    src_denom = "dhives"
 
     old_src_balance = get_balance(src_chain, src_addr, src_denom)
     old_dst_balance = get_balance(dst_chain, dst_addr, EVMOS_IBC_DENOM)
@@ -218,7 +218,7 @@ def send_evmos_to_osmos(ibc):
 
 def transfer_osmo_to_evmos(ibc, src_addr, dst_addr):
     src_chain: CosmosChain = ibc.chains["osmosis"]
-    dst_chain: Evmos = ibc.chains["egax"]
+    dst_chain: Evmos = ibc.chains["dhives"]
 
     cli = src_chain.cosmos_cli()
     src_addr = cli.address("signer2")

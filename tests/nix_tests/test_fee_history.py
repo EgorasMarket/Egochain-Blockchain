@@ -19,15 +19,15 @@ def custom_evmos_rocksdb(tmp_path_factory):
     yield from setup_evmos_rocksdb(path, 26510)
 
 
-@pytest.fixture(scope="module", params=["egax", "egax-rocksdb", "geth"])
+@pytest.fixture(scope="module", params=["dhives", "dhives-rocksdb", "geth"])
 def cluster(request, custom_evmos, custom_evmos_rocksdb, geth):
     """
     run on evmos, evmos built with rocksdb and geth
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield custom_evmos_rocksdb
     elif provider == "geth":
         yield geth

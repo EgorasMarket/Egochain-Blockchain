@@ -1,7 +1,7 @@
 local config = import 'ibc.jsonnet';
 
 config {
-  'egax_5438-1'+: {
+  'dhives_5438-1'+: {
     genesis+: {
       app_state+: {
         feemarket+: {

@@ -35,7 +35,7 @@ FROM alpine:3.19
 
 WORKDIR /root
 
-COPY --from=build-env /go/src/github.com/evmos/evmos/build/evmosd /usr/bin/egaxd
+COPY --from=build-env /go/src/github.com/evmos/evmos/build/evmosd /usr/bin/dhivesd
 COPY --from=build-env /go/bin/toml-cli /usr/bin/toml-cli
 
 # required for rocksdb build
@@ -53,4 +53,4 @@ WORKDIR /home/evmos
 EXPOSE 26656 26657 1317 9090 8545 8546
 
 
-CMD ["egaxd"]
+CMD ["dhivesd"]

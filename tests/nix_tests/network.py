@@ -121,7 +121,7 @@ def setup_evmos(path, base_port, long_timeout_commit=False):
 # for the nodes
 def create_snapshots_dir(path, base_port, config, n_nodes=2):
     for idx in range(n_nodes):
-        data_snapshots_dir = path / "egax_5438-1" / \
+        data_snapshots_dir = path / "dhives_5438-1" / \
             f"node{idx}" / "data" / "snapshots"
         os.makedirs(data_snapshots_dir, exist_ok=True)
 
@@ -202,7 +202,7 @@ def setup_custom_evmos(
             wait_for_port(ports.evmrpc_port(base_port))
             wait_for_port(ports.evmrpc_ws_port(base_port))
         yield Evmos(
-            path / "egax_5438-1", chain_binary=chain_binary or DEFAULT_CHAIN_BINARY
+            path / "dhives_5438-1", chain_binary=chain_binary or DEFAULT_CHAIN_BINARY
         )
     finally:
         os.killpg(os.getpgid(proc.pid), signal.SIGTERM)

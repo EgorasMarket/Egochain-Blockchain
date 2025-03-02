@@ -60,37 +60,37 @@ func TestEqualMetadata(t *testing.T) {
 		{
 			"equal metadata",
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
-						Aliases:  []string{"atto egax"},
+						Aliases:  []string{"atto dhives"},
 					},
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
-						Aliases:  []string{"atto egax"},
+						Aliases:  []string{"atto dhives"},
 					},
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 18,
 					},
 				},
@@ -100,42 +100,42 @@ func TestEqualMetadata(t *testing.T) {
 		{
 			"different base field",
 			banktypes.Metadata{
-				Base: "egax",
+				Base: "dhives",
 			},
 			banktypes.Metadata{
-				Base: "tegax",
+				Base: "tdhives",
 			},
 			true,
 		},
 		{
 			"different denom units length",
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
-						Aliases:  []string{"atto egax"},
+						Aliases:  []string{"atto dhives"},
 					},
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
 						Aliases:  []string{"atto evmos"},
 					},
@@ -146,47 +146,47 @@ func TestEqualMetadata(t *testing.T) {
 		{
 			"different denom units",
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
-						Aliases:  []string{"atto egax"},
+						Aliases:  []string{"atto dhives"},
 					},
 					{
-						Denom:    "uegax",
+						Denom:    "udhives",
 						Exponent: 12,
-						Aliases:  []string{"micro egax"},
+						Aliases:  []string{"micro dhives"},
 					},
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
-				Base:        "egax",
-				Display:     "egax",
-				Name:        "Egax",
-				Symbol:      "EGAX",
+				Base:        "dhives",
+				Display:     "dhives",
+				Name:        "Dhives",
+				Symbol:      "DHIVES",
 				Description: "EVM, staking and governance denom of Egochain",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 0,
-						Aliases:  []string{"atto egax"},
+						Aliases:  []string{"atto dhives"},
 					},
 					{
-						Denom:    "Uegax",
+						Denom:    "Udhives",
 						Exponent: 12,
-						Aliases:  []string{"micro egax"},
+						Aliases:  []string{"micro dhives"},
 					},
 					{
-						Denom:    "egax",
+						Denom:    "dhives",
 						Exponent: 18,
 					},
 				},
@@ -232,14 +232,14 @@ func TestEqualAliases(t *testing.T) {
 		},
 		{
 			"same values, unsorted",
-			[]string{"atto egax", "egax"},
-			[]string{"egax", "atto egax"},
+			[]string{"atto dhives", "dhives"},
+			[]string{"dhives", "atto dhives"},
 			false,
 		},
 		{
 			"same values, sorted",
-			[]string{"egax", "atto egax"},
-			[]string{"egax", "atto egax"},
+			[]string{"dhives", "atto dhives"},
+			[]string{"dhives", "atto dhives"},
 			true,
 		},
 	}

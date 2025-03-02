@@ -1,7 +1,7 @@
 local config = import 'default.jsonnet';
 
 config {
-  'egax_5438-1'+: {
+  'dhives_5438-1'+: {
     key_name: 'signer1',
     'app-config'+: {
       'index-events': super['index-events'] + ['message.action'],
@@ -111,7 +111,7 @@ config {
     },
     chains: [
       {
-        id: 'egax_5438-1',
+        id: 'dhives_5438-1',
         max_gas: 3000000,
         default_gas: 100000,
         gas_multiplier: 1.2,
@@ -123,7 +123,7 @@ config {
         },
         gas_price: {
           price: 40000000000,
-          denom: 'egax',
+          denom: 'dhives',
         },
         extension_options: [{
           type: 'ethermint_dynamic_fee',

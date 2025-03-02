@@ -7,8 +7,8 @@ TMVERSION := $(shell go list -m github.com/cometbft/cometbft | sed 's:.* ::')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 BINDIR ?= $(GOPATH)/bin
-EVMOS_BINARY = egaxd
-EVMOS_DIR = egochain
+EVMOS_BINARY = dhivesd
+EVMOS_DIR = dhives
 BUILDDIR ?= $(CURDIR)/build
 HTTPS_GIT := https://github.com/evmos/evmos.git
 DOCKER := $(shell which docker)
@@ -20,7 +20,7 @@ ifdef GITHUB_TOKEN
 	endif
 endif
 NAMESPACE := tharsishq
-PROJECT := egochain
+PROJECT := dhives
 DOCKER_IMAGE := $(NAMESPACE)/$(PROJECT)
 COMMIT_HASH := $(shell git rev-parse --short=7 HEAD)
 DOCKER_TAG := $(COMMIT_HASH)
@@ -157,7 +157,7 @@ build-reproducible: go.sum
 	$(DOCKER) rm latest-build || true
 	$(DOCKER) run --volume=$(CURDIR):/sources:ro \
         --env TARGET_PLATFORMS='linux/amd64' \
-        --env APP=egaxd \
+        --env APP=dhivesd \
         --env VERSION=$(VERSION) \
         --env COMMIT=$(COMMIT) \
         --env CGO_ENABLED=1 \
@@ -172,12 +172,12 @@ build-docker:
 	$(DOCKER) tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
 	# docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${COMMIT_HASH}
 	# move the binaries to the ./build directory
-	mkdir -p ./build/.egaxd
-	echo '#!/usr/bin/env bash' > ./build/egaxd
-	echo "IMAGE_NAME=${DOCKER_IMAGE}:${COMMIT_HASH}" >> ./build/egaxd
-	echo 'SCRIPT_PATH=$$(cd $$(dirname $$0) && pwd -P)' >> ./build/egaxd
-	echo 'docker run -it --rm -v $${SCRIPT_PATH}/.egaxd:/home/egochain/.egaxd $$IMAGE_NAME egaxd "$$@"' >> ./build/egaxd
-	chmod +x ./build/egaxd
+	mkdir -p ./build/.dhivesd
+	echo '#!/usr/bin/env bash' > ./build/dhivesd
+	echo "IMAGE_NAME=${DOCKER_IMAGE}:${COMMIT_HASH}" >> ./build/dhivesd
+	echo 'SCRIPT_PATH=$$(cd $$(dirname $$0) && pwd -P)' >> ./build/dhivesd
+	echo 'docker run -it --rm -v $${SCRIPT_PATH}/.dhivesd:/home/dhives/.dhivesd $$IMAGE_NAME dhivesd "$$@"' >> ./build/dhivesd
+	chmod +x ./build/dhivesd
 
 build-pebbledb:
 	@go mod edit -replace github.com/cometbft/cometbft-db=github.com/notional-labs/cometbft-db@pebble
@@ -349,7 +349,7 @@ test-e2e:
 		make build-docker; \
 	fi
 	@mkdir -p ./build
-	@rm -rf build/.egaxd
+	@rm -rf build/.dhivesd
 	@INITIAL_VERSION=$(INITIAL_VERSION) TARGET_VERSION=$(TARGET_VERSION) \
 	E2E_SKIP_CLEANUP=$(E2E_SKIP_CLEANUP) MOUNT_PATH=$(MOUNT_PATH) CHAIN_ID=$(CHAIN_ID) \
 	go test -v ./tests/e2e -run ^TestIntegrationTestSuite$

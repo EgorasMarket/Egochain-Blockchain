@@ -15,7 +15,7 @@ from .utils import (
 )
 
 
-@pytest.fixture(scope="module", params=["egax", "egax-rocksdb"])
+@pytest.fixture(scope="module", params=["dhives", "dhives-rocksdb"])
 def ibc(request, tmp_path_factory):
     """
     Prepares the network.
@@ -36,16 +36,16 @@ def test_ibc_transfer(ibc):
     dst_addr = ibc.chains["chainmain"].cosmos_cli().address("signer2")
     amt = 1000000
 
-    cli = ibc.chains["egax"].cosmos_cli()
+    cli = ibc.chains["dhives"].cosmos_cli()
     src_addr = cli.address("signer2")
-    src_denom = "egax"
+    src_denom = "dhives"
 
-    old_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+    old_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
     old_dst_balance = get_balance(
         ibc.chains["chainmain"], dst_addr, EVMOS_IBC_DENOM)
 
-    pc = get_precompile_contract(ibc.chains["egax"].w3, "ICS20I")
-    evmos_gas_price = ibc.chains["egax"].w3.eth.gas_price
+    pc = get_precompile_contract(ibc.chains["dhives"].w3, "ICS20I")
+    evmos_gas_price = ibc.chains["dhives"].w3.eth.gas_price
 
     tx = pc.functions.transfer(
         "transfer",
@@ -63,8 +63,8 @@ def test_ibc_transfer(ibc):
             "gasPrice": evmos_gas_price,
         }
     )
-    gas_estimation = ibc.chains["egax"].w3.eth.estimate_gas(tx)
-    receipt = send_transaction(ibc.chains["egax"].w3, tx, KEYS["signer2"])
+    gas_estimation = ibc.chains["dhives"].w3.eth.estimate_gas(tx)
+    receipt = send_transaction(ibc.chains["dhives"].w3, tx, KEYS["signer2"])
 
     assert receipt.status == 1
     # check gas used
@@ -86,7 +86,7 @@ def test_ibc_transfer(ibc):
 
     wait_for_fn("balance change", check_balance_change)
     assert old_dst_balance + amt == new_dst_balance
-    new_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+    new_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
     assert old_src_balance - amt - fee == new_src_balance
 
 
@@ -105,14 +105,14 @@ def test_ibc_transfer_invalid_packet(ibc):
     dst_addr = ibc.chains["chainmain"].cosmos_cli().address("signer2")
     amt = 1000000
 
-    cli = ibc.chains["egax"].cosmos_cli()
+    cli = ibc.chains["dhives"].cosmos_cli()
     src_addr = cli.address("signer2")
-    src_denom = "egax"
+    src_denom = "dhives"
 
-    old_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+    old_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
 
-    pc = get_precompile_contract(ibc.chains["egax"].w3, "ICS20I")
-    evmos_gas_price = ibc.chains["egax"].w3.eth.gas_price
+    pc = get_precompile_contract(ibc.chains["dhives"].w3, "ICS20I")
+    evmos_gas_price = ibc.chains["dhives"].w3.eth.gas_price
 
     try:
         pc.functions.transfer(
@@ -129,7 +129,7 @@ def test_ibc_transfer_invalid_packet(ibc):
     except Exception as error:
         assert error.args[0]["message"] == f"rpc error: code = Unknown desc = {exp_err}"
 
-        new_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+        new_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
         assert old_src_balance == new_src_balance
 
 
@@ -148,14 +148,14 @@ def test_ibc_transfer_timeout(ibc):
     dst_addr = ibc.chains["chainmain"].cosmos_cli().address("signer2")
     amt = 1000000
 
-    cli = ibc.chains["egax"].cosmos_cli()
+    cli = ibc.chains["dhives"].cosmos_cli()
     src_addr = cli.address("signer2")
-    src_denom = "egax"
+    src_denom = "dhives"
 
-    old_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+    old_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
 
-    pc = get_precompile_contract(ibc.chains["egax"].w3, "ICS20I")
-    evmos_gas_price = ibc.chains["egax"].w3.eth.gas_price
+    pc = get_precompile_contract(ibc.chains["dhives"].w3, "ICS20I")
+    evmos_gas_price = ibc.chains["dhives"].w3.eth.gas_price
 
     try:
         pc.functions.transfer(
@@ -172,19 +172,19 @@ def test_ibc_transfer_timeout(ibc):
     except Exception as error:
         assert re.search(exp_err, error.args[0]["message"]) is not None
 
-        new_src_balance = get_balance(ibc.chains["egax"], src_addr, src_denom)
+        new_src_balance = get_balance(ibc.chains["dhives"], src_addr, src_denom)
         assert old_src_balance == new_src_balance
 
 
 def test_staking(ibc):
     assert_ready(ibc)
 
-    evmos: Evmos = ibc.chains["egax"]
+    evmos: Evmos = ibc.chains["dhives"]
     w3 = evmos.w3
     amt = 1000000
     cli = evmos.cosmos_cli()
     del_addr = cli.address("signer2")
-    src_denom = "egax"
+    src_denom = "dhives"
     validator_addr = cli.validators()[0]["operator_address"]
 
     old_src_balance = get_balance(evmos, del_addr, src_denom)
@@ -216,12 +216,12 @@ def test_staking(ibc):
 def test_staking_via_sc(ibc):
     assert_ready(ibc)
 
-    evmos: Evmos = ibc.chains["egax"]
+    evmos: Evmos = ibc.chains["dhives"]
     w3 = evmos.w3
     amt = 1000000
     cli = evmos.cosmos_cli()
     del_addr = cli.address("signer1")
-    src_denom = "egax"
+    src_denom = "dhives"
     validator_addr = cli.validators()[0]["operator_address"]
 
     old_src_balance = get_balance(evmos, del_addr, src_denom)

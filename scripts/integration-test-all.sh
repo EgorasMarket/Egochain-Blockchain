@@ -17,7 +17,7 @@ RPC_PORT="854"
 IP_ADDR="0.0.0.0"
 
 KEY="dev0"
-CHAINID="egax_5438-1"
+CHAINID="dhives_5438-1"
 MONIKER="mymoniker"
 
 ## default port prefixes for evmosd
@@ -70,9 +70,9 @@ init_func() {
     "$PWD"/build/evmosd keys add $KEY"$i" --keyring-backend test --home "$DATA_DIR$i" --no-backup --algo "eth_secp256k1"
     "$PWD"/build/evmosd init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
     "$PWD"/build/evmosd add-genesis-account \
-    "$("$PWD"/build/evmosd keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000egax,1000000000000000000egax \
+    "$("$PWD"/build/evmosd keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000dhives,1000000000000000000dhives \
     --keyring-backend test --home "$DATA_DIR$i"
-    "$PWD"/build/evmosd gentx "$KEY$i" 1000000000000000000egax --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
+    "$PWD"/build/evmosd gentx "$KEY$i" 1000000000000000000dhives --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
     "$PWD"/build/evmosd collect-gentxs --home "$DATA_DIR$i"
     "$PWD"/build/evmosd validate-genesis --home "$DATA_DIR$i"
 

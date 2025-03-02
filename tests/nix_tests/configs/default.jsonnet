@@ -1,13 +1,13 @@
 {
   dotenv: '../../../scripts/.env',
-  'egax_5438-1': {
-    'account-prefix': 'egax',
+  'dhives_5438-1': {
+    'account-prefix': 'dhives',
     'coin-type': 60,
     cmd: 'evmosd',
     'start-flags': '--trace',
     'app-config': {
       'app-db-backend': 'goleveldb',      
-      'minimum-gas-prices': '0egax',
+      'minimum-gas-prices': '0dhives',
       'index-events': ['ethereum_tx.ethereumTxHash'],
       'json-rpc': {
         address: '127.0.0.1:{EVMRPC_PORT}',
@@ -24,25 +24,25 @@
       }
     },
     validators: [{
-      coins: '10001000000000000000000egax',
-      staked: '1000000000000000000egax',
+      coins: '10001000000000000000000dhives',
+      staked: '1000000000000000000dhives',
       mnemonic: '${VALIDATOR1_MNEMONIC}',
     }, {
-      coins: '10001000000000000000000egax',
-      staked: '1000000000000000000egax',
+      coins: '10001000000000000000000dhives',
+      staked: '1000000000000000000dhives',
       mnemonic: '${VALIDATOR2_MNEMONIC}',
     }],
     accounts: [{
       name: 'community',
-      coins: '10000000000000000000000egax',
+      coins: '10000000000000000000000dhives',
       mnemonic: '${COMMUNITY_MNEMONIC}',
     }, {
       name: 'signer1',
-      coins: '20000000000000000000000egax',
+      coins: '20000000000000000000000dhives',
       mnemonic: '${SIGNER1_MNEMONIC}',
     }, {
       name: 'signer2',
-      coins: '30000000000000000000000egax',
+      coins: '30000000000000000000000dhives',
       mnemonic: '${SIGNER2_MNEMONIC}',
     }],
     genesis: {
@@ -55,22 +55,22 @@
       app_state: {
         evm: {
           params: {
-            evm_denom: 'egax',
+            evm_denom: 'dhives',
           },
         },
         crisis: {
           constant_fee: {
-            denom: 'egax',
+            denom: 'dhives',
           },
         },
         staking: {
           params: {
-            bond_denom: 'egax',
+            bond_denom: 'dhives',
           },
         },     
         inflation: {
           params: {
-            mint_denom: 'egax',
+            mint_denom: 'dhives',
           },
         },           
         gov: {
@@ -81,7 +81,7 @@
             max_deposit_period: '10s',
             min_deposit: [
               {
-                denom: 'egax',
+                denom: 'dhives',
                 amount: '1',
               },
             ],
@@ -89,7 +89,7 @@
           params: {
             min_deposit: [
               {
-                denom: 'egax',
+                denom: 'dhives',
                 amount: '1',
               },
             ],

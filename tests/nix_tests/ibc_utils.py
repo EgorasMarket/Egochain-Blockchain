@@ -22,7 +22,7 @@ from .utils import (
     wait_for_port,
 )
 
-# egax IBC representation on another chain connected via channel-0.
+# dhives IBC representation on another chain connected via channel-0.
 EVMOS_IBC_DENOM = "ibc/8EAC8061F4499F03D2D1419A3E73D346289AE9DB89CAB1486B72539572B1915E"
 # uosmo IBC representation on the Evmos chain.
 OSMO_IBC_DENOM = "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518"
@@ -30,15 +30,15 @@ OSMO_IBC_DENOM = "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F9771
 RATIO = 10**10
 # IBC_CHAINS_META metadata of cosmos chains to setup these for IBC tests
 IBC_CHAINS_META = {
-    "egax": {
-        "chain_name": "egax_5438-1",
+    "dhives": {
+        "chain_name": "dhives_5438-1",
         "bin": "evmosd",
-        "denom": "egax",
+        "denom": "dhives",
     },
     "evmos-rocksdb": {
-        "chain_name": "egax_5438-1",
+        "chain_name": "dhives_5438-1",
         "bin": "evmosd-rocksdb",
-        "denom": "egax",
+        "denom": "dhives",
     },
     "chainmain": {
         "chain_name": "chainmain-1",
@@ -61,7 +61,7 @@ IBC_CHAINS_META = {
         "denom": "uatom",
     },
 }
-EVM_CHAINS = ["egax_5438", "chainmain-1"]
+EVM_CHAINS = ["dhives_5438", "chainmain-1"]
 
 
 class IBCNetwork(NamedTuple):
@@ -134,7 +134,7 @@ def prepare_network(
 
         # evmos is the first chain
         # set it up and the relayer
-        if "egax" in chain_name:
+        if "dhives" in chain_name:
             # setup evmos with the custom config
             # depending on the build
             gen = get_evmos_generator(
@@ -149,7 +149,7 @@ def prepare_network(
             wait_for_port(ports.grpc_port(evmos.base_port(0)))  # evmos grpc
             # setup relayer
             hermes = Hermes(tmp_path / "relayer.toml")
-            chains = {"egax": evmos}
+            chains = {"dhives": evmos}
             continue
 
         chain_instance = CosmosChain(tmp_path / chain_name, meta["bin"])
@@ -216,9 +216,9 @@ def assert_ready(ibc):
 
 def hermes_transfer(ibc, other_chain_name="chainmain-1", other_chain_denom="basecro"):
     assert_ready(ibc)
-    # chainmain-1 -> egax_5438-1
+    # chainmain-1 -> dhives_5438-1
     my_ibc0 = other_chain_name
-    my_ibc1 = "egax_5438-1"
+    my_ibc1 = "dhives_5438-1"
     my_channel = "channel-0"
     dst_addr = eth_to_bech32(ADDRS["signer2"])
     src_amount = 10

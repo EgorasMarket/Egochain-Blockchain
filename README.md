@@ -4,5 +4,5 @@ parent:
 -->
 
 <div align="center">
-  <h1> Egochain </h1>
+  <h1> Dhives </h1>
 </div>

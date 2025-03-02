@@ -28,16 +28,16 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["egax", "egax-rocksdb"])
+@pytest.fixture(scope="module", params=["dhives", "dhives-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on egax and
-    egax built with rocksdb (memIAVL + versionDB)
+    run on dhives and
+    dhives built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield custom_evmos_rocksdb
     else:
         raise NotImplementedError

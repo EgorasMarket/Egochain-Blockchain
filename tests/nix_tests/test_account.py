@@ -21,21 +21,21 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["egax", "egax-ws", "egax-rocksdb", "geth"])
+@pytest.fixture(scope="module", params=["dhives", "dhives-ws", "dhives-rocksdb", "geth"])
 def cluster(request, custom_evmos, custom_evmos_rocksdb, geth):
     """
-    run on egax, egax websocket,
-    egax built with rocksdb (memIAVL + versionDB)
+    run on dhives, dhives websocket,
+    dhives built with rocksdb (memIAVL + versionDB)
     and geth
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
-    elif provider == "egax-ws":
+    elif provider == "dhives-ws":
         evmos_ws = custom_evmos.copy()
         evmos_ws.use_websocket()
         yield evmos_ws
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield custom_evmos_rocksdb
     elif provider == "geth":
         yield geth

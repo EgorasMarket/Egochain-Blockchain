@@ -42,14 +42,14 @@ def custom_evmos_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["egax", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["dhives", "evmos-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on egax and
-    egax built with rocksdb (memIAVL + versionDB)
+    run on dhives and
+    dhives built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
     elif provider == "evmos-rocksdb":
         yield custom_evmos_rocksdb
@@ -102,7 +102,7 @@ def test_grpc_mode(evmos_cluster: Evmos):
     for i in range(2):
         wait_for_block(evmos_cluster.cosmos_cli(i), 1)
     supervisorctl(evmos_cluster.base_dir / "../tasks.ini",
-                  "stop", "egax_5438-1-node1")
+                  "stop", "dhives_5438-1-node1")
 
     # run grpc-only mode directly with existing chain state
     with (evmos_cluster.base_dir / "node1.log").open("a") as logfile:
@@ -146,7 +146,7 @@ def test_grpc_mode(evmos_cluster: Evmos):
             rsp = grpc_eth_call(
                 api_port,
                 msg,
-                chain_id="egax_5438",
+                chain_id="dhives_5438",
                 proposer_address=proposer_addr,
             )
             assert rsp["code"] != 0, str(rsp)

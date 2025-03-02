@@ -57,7 +57,7 @@ import (
 )
 
 const (
-	EnvPrefix = "EGAX"
+	EnvPrefix = "DHIVES"
 )
 
 // NewRootCmd creates a new root command for evmosd. It is called once in the
@@ -81,7 +81,7 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 
 	rootCmd := &cobra.Command{
 		Use:   app.Name,
-		Short: "Egax Daemon",
+		Short: "Dhives Daemon",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())

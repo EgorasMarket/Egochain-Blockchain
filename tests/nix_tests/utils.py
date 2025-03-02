@@ -29,8 +29,8 @@ ACCOUNTS = {
 }
 KEYS = {name: account.key for name, account in ACCOUNTS.items()}
 ADDRS = {name: account.address for name, account in ACCOUNTS.items()}
-EVMOS_ADDRESS_PREFIX = "egax"
-DEFAULT_DENOM = "egax"
+EVMOS_ADDRESS_PREFIX = "dhives"
+DEFAULT_DENOM = "dhives"
 WEVMOS_ADDRESS = Web3.toChecksumAddress(
     "0xcc491f589b45d4a3c679016195b3fb87d7848210")
 TEST_CONTRACTS = {
@@ -420,7 +420,7 @@ local default = import '{tests_dir}/configs/{file_name}.jsonnet';
 
 default {{
   dotenv: '{root_dir}/scripts/.env',
-  'egax_5438-1'+: {{
+  'dhives_5438-1'+: {{
     cmd: 'evmosd-rocksdb',
     'app-config'+: {{
       'app-db-backend': 'rocksdb',
@@ -465,7 +465,7 @@ def update_node_cmd(path, cmd, i):
     ini = configparser.RawConfigParser()
     ini.read(ini_path)
     for section in ini.sections():
-        if section == f"program:egax_5438-1-node{i}":
+        if section == f"program:dhives_5438-1-node{i}":
             ini[section].update(
                 {
                     "command": f"{cmd} start --home %(here)s/node{i}",
@@ -495,7 +495,7 @@ def update_evmos_bin(modified_bin, nodes=[0, 1]):
     """
 
     def inner(path, base_port, config):
-        chain_id = "egax_5438-1"
+        chain_id = "dhives_5438-1"
         # by default, there're 2 nodes
         # need to update the bin in all these
         for i in nodes:

@@ -1,7 +1,7 @@
 local config = import 'default.jsonnet';
 
 config {
-  'egax_5438-1'+: {
+  'dhives_5438-1'+: {
     validators: super.validators[0:1] + [{
       name: 'fullnode',
     }],

@@ -32,24 +32,24 @@ def evmos_indexer(tmp_path_factory):
 
 @pytest.fixture(
     scope="module",
-    params=["egax", "geth", "egax-ws", "enable-indexer", "egax-rocksdb"],
+    params=["dhives", "geth", "dhives-ws", "enable-indexer", "dhives-rocksdb"],
 )
 def cluster(request, custom_evmos, evmos_indexer, evmos_rocksdb, geth):
     """
-    run on both egax and geth
+    run on both dhives and geth
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
     elif provider == "geth":
         yield geth
-    elif provider == "egax-ws":
+    elif provider == "dhives-ws":
         evmos_ws = custom_evmos.copy()
         evmos_ws.use_websocket()
         yield evmos_ws
     elif provider == "enable-indexer":
         yield evmos_indexer
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield evmos_rocksdb
     else:
         raise NotImplementedError

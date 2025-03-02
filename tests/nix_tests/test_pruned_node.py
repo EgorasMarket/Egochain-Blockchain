@@ -32,7 +32,7 @@ def pruned(tmp_path_factory):
 @pytest.fixture(scope="module")
 def pruned_rocksdb(tmp_path_factory):
     """
-    setup egax with memIAVL + versionDB
+    setup dhives with memIAVL + versionDB
     and 'pruning = everything'
     """
     yield from setup_custom_evmos(
@@ -44,16 +44,16 @@ def pruned_rocksdb(tmp_path_factory):
     )
 
 
-@pytest.fixture(scope="module", params=["egax", "egax-rocksdb"])
+@pytest.fixture(scope="module", params=["dhives", "dhives-rocksdb"])
 def pruned_cluster(request, pruned, pruned_rocksdb):
     """
-    run on egax and
-    egax built with rocksdb (memIAVL + versionDB)
+    run on dhives and
+    dhives built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield pruned
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield pruned_rocksdb
     else:
         raise NotImplementedError

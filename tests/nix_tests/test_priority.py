@@ -24,16 +24,16 @@ def custom_evmos_rocksdb(tmp_path_factory):
     yield from setup_evmos_rocksdb(path, 26810, long_timeout_commit=True)
 
 
-@pytest.fixture(scope="module", params=["egax", "evmos-rocksdb"])
+@pytest.fixture(scope="module", params=["dhives", "evmos-rocksdb"])
 def evmos_cluster(request, custom_evmos, custom_evmos_rocksdb):
     """
-    run on egax and
-    egax built with rocksdb (memIAVL + versionDB)
+    run on dhives and
+    dhives built with rocksdb (memIAVL + versionDB)
     """
     provider = request.param
-    if provider == "egax":
+    if provider == "dhives":
         yield custom_evmos
-    elif provider == "egax-rocksdb":
+    elif provider == "dhives-rocksdb":
         yield custom_evmos_rocksdb
     else:
         raise NotImplementedError
@@ -163,29 +163,29 @@ def test_native_tx_priority(evmos_cluster):
         {
             "from": eth_to_bech32(ADDRS["community"]),
             "to": eth_to_bech32(ADDRS["validator"]),
-            "amount": "1000egax",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
+            "amount": "1000dhives",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}dhives",
             "max_priority_price": 0,
         },
         {
             "from": eth_to_bech32(ADDRS["signer1"]),
             "to": eth_to_bech32(ADDRS["signer2"]),
-            "amount": "1000egax",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
+            "amount": "1000dhives",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}dhives",
             "max_priority_price": PRIORITY_REDUCTION * 200000,
         },
         {
             "from": eth_to_bech32(ADDRS["signer2"]),
             "to": eth_to_bech32(ADDRS["signer1"]),
-            "amount": "1000egax",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 400000}egax",
+            "amount": "1000dhives",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 400000}dhives",
             "max_priority_price": PRIORITY_REDUCTION * 400000,
         },
         {
             "from": eth_to_bech32(ADDRS["validator"]),
             "to": eth_to_bech32(ADDRS["community"]),
-            "amount": "1000egax",
-            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}egax",
+            "amount": "1000dhives",
+            "gas_prices": f"{base_fee + PRIORITY_REDUCTION * 600000}dhives",
             "max_priority_price": None,  # no extension, maximum tipFeeCap
         },
     ]
@@ -204,7 +204,7 @@ def test_native_tx_priority(evmos_cluster):
                 tx, tc["from"], max_priority_price=tc.get("max_priority_price")
             )
         )
-        gas_price = int(tc["gas_prices"].removesuffix("egax"))
+        gas_price = int(tc["gas_prices"].removesuffix("dhives"))
         expect_priorities.append(
             min(
                 get_max_priority_price(tc.get("max_priority_price")),
