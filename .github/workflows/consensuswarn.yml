@@ -13,7 +13,7 @@ jobs:
       pull-requests: write  # For reading the PR and posting comment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: orijtech/consensuswarn@main
         with:
           roots: 'github.com/evmos/evmos/v16/app.Evmos.DeliverTx,github.com/evmos/evmos/v16/app.Evmos.BeginBlocker,github.com/evmos/evmos/v16/app.Evmos.EndBlocker'
