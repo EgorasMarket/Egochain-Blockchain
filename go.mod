@@ -34,7 +34,7 @@ require (
 	github.com/onsi/gomega v1.31.1
 	github.com/ory/dockertest/v3 v3.10.0
 	github.com/pkg/errors v0.9.1
-	github.com/rakyll/statik v0.1.7
+	github.com/rakyll/statik v0.1.8
 	github.com/rs/cors v1.10.1
 	github.com/spf13/cast v1.6.0
 	github.com/spf13/cobra v1.8.0
