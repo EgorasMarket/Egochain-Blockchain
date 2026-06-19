@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Permission issue fix
         run: git config --global --add safe.directory /__w/evmos/evmos
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Get Diff
         uses: technote-space/get-diff-action@v6.1.2
         with:
@@ -26,7 +26,7 @@ jobs:
             go.mod
             go.sum
             *.toml
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: semgrep ci --config=auto
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}

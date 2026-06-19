@@ -12,7 +12,7 @@ jobs:
         with:
           go-version: '1.20'
           check-latest: true
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: technote-space/get-diff-action@v6.1.2
         with:
           PATTERNS: |
@@ -33,7 +33,7 @@ jobs:
     outputs:
       test_matrix: ${{ steps.set_matrix.outputs.test_matrix }}
     steps:      
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up test file matrix to run nix tests in parallel
         id: set_matrix
         run: |
@@ -82,7 +82,7 @@ jobs:
       matrix:
         test_files: ${{fromJson(needs.test-files-matrix.outputs.test_matrix)}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         # TODO: create a new PAT to use here
         # with:
         #   token: ${{ secrets.E2E_PAT }}        
@@ -128,7 +128,7 @@ jobs:
         os: [macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4   
+      - uses: actions/checkout@v7   
       - uses: cachix/install-nix-action@v25
         with:
           # pin to nix-2.13 to workaround compability issue of 2.14,
