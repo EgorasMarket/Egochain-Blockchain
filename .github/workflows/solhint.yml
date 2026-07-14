@@ -14,7 +14,7 @@ jobs:
         with:
           PATTERNS: |
             **/**.sol
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         if: env.GIT_DIFF
       - run: npm install -g solhint
         if: env.GIT_DIFF
