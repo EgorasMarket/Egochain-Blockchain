@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Changelog for changes
-        uses: tarides/changelog-check-action@v2
+        uses: tarides/changelog-check-action@v4
         with:
           changelog: CHANGELOG.md
 
